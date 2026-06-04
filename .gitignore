@@ -1,0 +1,52 @@
+## IDE / EDITOR ##
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+*.swp
+*.swo
+.nvimlog
+.netrwhist
+
+
+## FRONTEND / CLIENT ##
+# FLUTTER
+client/**/doc/api/
+client/**/ios/Flutter/.last_build_id
+client/.dart_tool/
+client/.flutter-plugins
+client/.flutter-plugins-dependencies
+client/.pub-cache/
+client/.pub/
+client/build/
+client/coverage/
+
+# SYMBOLICATION
+client/app.*.symbols
+
+# OBFUSCATION
+client/app.*.map.json
+
+# ANDROID STUDIO BUILD ARTIFACTS
+client/android/app/debug
+client/android/app/profile
+client/android/app/release
+
+
+## BACKEND / SERVER ##
+# BUILD ARTIFACTS
+server/build/
+server/bin/
+server/cmake-build-*/
+
+# CMAKE
+server/CMakeCache.txt
+server/CMakeFiles/
+server/CMakeTargetDirectories.txt
+server/cmake_install.cmake
+server/Makefile
+server/compile_commands.json
+
+# LSP CACHE
+server/.cache/
