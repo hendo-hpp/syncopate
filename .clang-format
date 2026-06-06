@@ -1,0 +1,19 @@
+---
+Language: Cpp
+BasedOnStyle: Chromium
+
+IndentWidth: 4
+ColumnLimit: 120
+UseTab: Never
+
+Standard: Latest
+
+NamespaceIndentation: None
+AlignAfterOpenBracket: Align
+AlignOperands: Align
+AlignTrailingComments: true
+
+PointerAlignment: Left
+
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
