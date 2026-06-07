@@ -18,8 +18,17 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Threads::Threads
 )
 
+
 # custom format module
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(format)
 enable_clang_format()
+
+
+# testing config
+option(BUILD_TESTING "Enable unit/integration testing" ON)
+
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

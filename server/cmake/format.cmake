@@ -6,6 +6,7 @@ function(enable_clang_format)
         file(GLOB_RECURSE ALL_FORMAT_FILES 
             "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" 
             "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp"
         )
 
         # format target
