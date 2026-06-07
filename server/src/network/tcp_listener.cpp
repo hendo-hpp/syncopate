@@ -57,13 +57,13 @@ int tcp_listener::accept_connection() {
     struct sockaddr_in addr{};
     socklen_t addr_len = sizeof(addr);
 
-    int accepted_socket = accept(m_server_fd, reinterpret_cast<struct sockaddr*>(&addr), &addr_len);
-    if (accepted_socket < 0) {
+    int client_fd = accept(m_server_fd, reinterpret_cast<struct sockaddr*>(&addr), &addr_len);
+    if (client_fd < 0) {
         std::cerr << "TCP_LISTENER: failed to accept connection request.\n";
         return -1;
     }
 
-    return accepted_socket;
+    return client_fd;
 }
 
 void tcp_listener::stop() {
