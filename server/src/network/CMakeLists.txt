@@ -1,5 +1,5 @@
 add_library(sync_network STATIC
-    socket.cpp
+    tcp_listener.cpp
 )
 
 target_include_directories(sync_network PUBLIC
