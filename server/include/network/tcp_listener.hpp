@@ -15,7 +15,7 @@ class tcp_listener {
     tcp_listener(const tcp_listener&) = delete;
     tcp_listener& operator=(const tcp_listener&) = delete;
 
-    bool start();
+    int start();
     int accept_connection();
     void stop();
 
