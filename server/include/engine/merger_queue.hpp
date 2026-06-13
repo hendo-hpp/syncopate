@@ -22,10 +22,10 @@ class merger_queue {
     void shutdown();
 
   private:
-    std::queue<syncopate::engine::track_task> m_track_queue;
-    mutable pthread_mutex_t m_mutex;
     pthread_cond_t m_cond;
+    mutable pthread_mutex_t m_mutex;
     bool m_server_shutdown{false};
+    std::queue<syncopate::engine::track_task> m_track_queue;
 };
 
 } // namespace syncopate::engine
