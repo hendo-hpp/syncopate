@@ -13,12 +13,12 @@ tcp_listener::tcp_listener(uint16_t port) : m_port(port) {}
 
 tcp_listener::~tcp_listener() { stop(); }
 
-bool tcp_listener::start() {
+int tcp_listener::start() {
     // communication endpoint
     m_server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (m_server_fd < 0) {
         std::cerr << "TCP_LISTENER: failed to create socket.\n";
-        return false;
+        return -1;
     }
 
     // socket address description
@@ -32,7 +32,7 @@ bool tcp_listener::start() {
     if (bind_status < 0) {
         std::cerr << "TCP_LISTENER: failed to bind address to socket.\n";
         stop();
-        return false;
+        return -1;
     }
 
     // start listening on the socket, with a queue of length BACKLOG_COUNT
@@ -40,11 +40,11 @@ bool tcp_listener::start() {
     if (listen_status < 0) {
         std::cerr << "TCP_LISTENER: failed to begin listening on port " << m_port << ".\n";
         stop();
-        return false;
+        return -1;
     }
 
     m_is_listening = true;
-    return true;
+    return 0;
 }
 
 int tcp_listener::accept_connection() {
