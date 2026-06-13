@@ -5,7 +5,7 @@
 
 namespace syncopate::config::engine {
 
-constexpr std::size_t NUM_THREADS = 20;
+constexpr std::size_t NUM_THREADS = 8;
 
 } // namespace syncopate::config::engine
 
