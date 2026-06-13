@@ -13,4 +13,6 @@ constexpr int BACKLOG_COUNT = 20;
 
 } // namespace syncopate::config::network
 
+namespace syncopate::config::engine {}
+
 #endif // SYNCOPATE_CONFIG_NETWORK_HPP__
