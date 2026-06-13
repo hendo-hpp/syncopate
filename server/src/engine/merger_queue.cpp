@@ -3,7 +3,6 @@
 #include <cstddef>
 #include <pthread.h>
 
-
 namespace syncopate::engine {
 
 merger_queue::merger_queue() {
@@ -12,7 +11,7 @@ merger_queue::merger_queue() {
 }
 
 merger_queue::~merger_queue() {
-    // mutex and condition variable must exist at this point due to constructor, no checks needed
+    // mutex and condition variable must exist at this point, no checks needed
     pthread_mutex_destroy(&m_mutex);
     pthread_cond_destroy(&m_cond);
 }
@@ -50,15 +49,19 @@ int merger_queue::dequeue(track_task& out_task) {
 }
 
 std::size_t merger_queue::size() const {
-    pthread_mutex_lock(const_cast<pthread_mutex_t*>(&m_mutex));
+    pthread_mutex_lock(&m_mutex);
     std::size_t curr_size = m_track_queue.size();
-    pthread_mutex_unlock(const_cast<pthread_mutex_t*>(&m_mutex));
+    pthread_mutex_unlock(&m_mutex);
 
     return curr_size;
 }
 
 void merger_queue::shutdown() {
+    pthread_mutex_lock(&m_mutex);
     m_server_shutdown = true;
+    pthread_mutex_unlock(&m_mutex);
+
+    // propegate shutdown to other threads
     pthread_cond_broadcast(&m_cond);
 }
 
