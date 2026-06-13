@@ -5,6 +5,11 @@
 
 #include <cstddef>
 #include <iostream>
+#include <string>
+
+// TODO: remove once API calls are ready, currently in use for testing
+#include <chrono>
+#include <thread>
 
 namespace syncopate::engine {
 
@@ -55,9 +60,9 @@ void* merger_pool::thread_entry(void* arg) {
     return nullptr;
 }
 
-void merger_pool::thread_loop() { 
-    track_task t_task; 
-    
+void merger_pool::thread_loop() {
+    track_task t_task;
+
     // consumers continuously look for work while the server is on
     while (true) {
         int dequeue_status = m_queue.dequeue(t_task);
@@ -67,7 +72,9 @@ void merger_pool::thread_loop() {
             break;
         }
 
-        std::cout << "artist: " << t_task.artist << ". name: " << t_task.track_name << ".\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::string log = "artist: " + t_task.artist + ". name: " + t_task.track_name + ".\n";
+        std::cout << log;
     }
 }
 
