@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <pthread.h>
 #include <string>
 
 // TODO: remove once API calls are ready, currently in use for testing

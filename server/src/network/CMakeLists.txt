@@ -1,4 +1,5 @@
 add_library(sync_network STATIC
+    protocol_parser.cpp
     tcp_listener.cpp
 )
 

@@ -9,10 +9,6 @@ namespace syncopate::config::network {
 constexpr uint16_t DEFAULT_PORT = 8080;
 constexpr int BACKLOG_COUNT = 20;
 
-// todo: api endpoints
-
 } // namespace syncopate::config::network
-
-namespace syncopate::config::engine {}
 
 #endif // SYNCOPATE_CONFIG_NETWORK_HPP__
