@@ -54,7 +54,7 @@ void speed_test() {
 
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
-        
+
         std::cout << "[BENCHMARK]: 4 threads took: " << duration << " ms\n";
     }
     {
@@ -75,7 +75,7 @@ void speed_test() {
 
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
-        
+
         std::cout << "[BENCHMARK]: 1 thread took: " << duration << " ms\n";
     }
 }
