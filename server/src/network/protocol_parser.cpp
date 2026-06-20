@@ -9,6 +9,31 @@
 
 namespace syncopate::network {
 
+int protocol_parser::read_packet_type(int client_fd, packet_type& out_type) {
+    uint8_t type_byte;
+    if (read_bytes(client_fd, &type_byte, sizeof(type_byte)) < 0) {
+        return -1;
+    }
+    out_type = static_cast<packet_type>(type_byte);
+    return 0;
+}
+
+int protocol_parser::parse_session_context(int client_fd, session_context& out_context) {
+    uint8_t source_byte;
+    if (read_bytes(client_fd, &source_byte, sizeof(source_byte)) < 0) {
+        return -1;
+    }
+    out_context.source = static_cast<engine::platform_type>(source_byte);
+
+    uint8_t dest_byte;
+    if (read_bytes(client_fd, &dest_byte, sizeof(dest_byte)) < 0) {
+        return -1;
+    }
+    out_context.dest = static_cast<engine::platform_type>(dest_byte);
+
+    return 0;
+}
+
 int protocol_parser::parse_track_task(int client_fd, engine::track_task& out_task) {
     // fields must be read in sequence
     if (read_string(client_fd, out_task.track_name) < 0) {
@@ -27,19 +52,6 @@ int protocol_parser::parse_track_task(int client_fd, engine::track_task& out_tas
         return -1;
     }
 
-    // source and destination enum
-    uint8_t source_byte;
-    if (read_bytes(client_fd, &source_byte, sizeof(source_byte)) < 0) {
-        return -1;
-    }
-    out_task.source = static_cast<engine::platform_type>(source_byte);
-
-    uint8_t dest_byte;
-    if (read_bytes(client_fd, &dest_byte, sizeof(dest_byte)) < 0) {
-        return -1;
-    }
-    out_task.dest = static_cast<engine::platform_type>(dest_byte);
-
     return 0;
 }
 
@@ -47,6 +59,7 @@ int protocol_parser::read_bytes(int fd, void* dest, size_t target_size) {
     size_t bytes_consumed = 0;
     size_t bytes_remaining = 0;
 
+    // for easy pointer arithmetic
     char* buffer_ptr = static_cast<char*>(dest);
 
     while (bytes_consumed < target_size) {
