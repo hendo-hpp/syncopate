@@ -27,8 +27,8 @@ enable_clang_format()
 
 
 # testing config
-option(BUILD_TESTING "Enable unit/integration testing" ON)
+option(BUILD_TESTS "Enable unit/integration testing" ON)
 
-if (BUILD_TESTING)
+if (BUILD_TESTS)
     add_subdirectory(tests)
 endif()
