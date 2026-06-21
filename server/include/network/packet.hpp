@@ -1,7 +1,7 @@
 #ifndef SYNCOPATE_NETWORK_PACKET_HPP__
 #define SYNCOPATE_NETWORK_PACKET_HPP__
 
-#include "engine/track.hpp"
+#include "engine/platform.hpp"
 
 #include <cstdint>
 

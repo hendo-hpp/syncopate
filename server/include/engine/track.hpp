@@ -1,15 +1,11 @@
 #ifndef SYNCOPATE_ENGINE_TRACK_HPP__
 #define SYNCOPATE_ENGINE_TRACK_HPP__
 
-#include <cstdint>
+#include "engine/platform.hpp"
+
 #include <string>
 
 namespace syncopate::engine {
-
-enum class platform_type : uint8_t {
-    APPLE_MUSIC,
-    SPOTIFY,
-};
 
 struct track_task {
     std::string track_name;
@@ -17,6 +13,9 @@ struct track_task {
     std::string album;
     std::string dest_playlist_id;
     std::string dest_auth_token;
+
+    // locations kept for worker threads to know
+    // target APIs.
     platform_type source;
     platform_type dest;
 };
