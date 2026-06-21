@@ -23,10 +23,10 @@ class merger_pool {
 
   private:
     // thread environment setup
-    static void* thread_entry(void* arg);
+    static void* merger_thread_entry(void* arg);
 
     // work to actually be done by threads
-    void thread_loop();
+    void merger_loop();
 
     merger_queue& m_queue;
     std::size_t m_num_threads;
