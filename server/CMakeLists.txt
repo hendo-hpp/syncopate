@@ -15,6 +15,7 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     sync_network
     sync_engine
+    sync_logger
     Threads::Threads
 )
 

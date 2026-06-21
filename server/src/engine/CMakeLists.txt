@@ -6,3 +6,7 @@ add_library(sync_engine STATIC
 target_include_directories(sync_engine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/../../include
 )
+
+target_link_libraries(sync_engine PRIVATE
+    sync_logger
+)

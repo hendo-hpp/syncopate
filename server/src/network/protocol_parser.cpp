@@ -1,6 +1,7 @@
 #include "network/protocol_parser.hpp"
 
 #include "config/network.hpp"
+#include "logger/logger.hpp"
 
 #include <cstddef>
 #include <iostream>
@@ -67,11 +68,11 @@ int protocol_parser::read_bytes(int fd, void* dest, size_t target_size) {
 
         ssize_t read_status = read(fd, buffer_ptr + bytes_consumed, bytes_remaining);
         if (read_status < 0) {
-            std::cerr << "PROTOCOL_PARSER: error reading from file descriptor: " << fd << ".\n";
+            LOG_ERR("PROTOCOL_PARSER: error reading from file descriptor: " + std::to_string(fd));
             return -1;
         }
         if (read_status == 0) {
-            std::cerr << "PROTOCOL_PARSER: client has disconnected on file descriptor: " << fd << ".\n";
+            LOG_ERR("PROTOCOL_PARSER: client has disconnected on file descriptor: " + std::to_string(fd));
             return -1;
         }
 
