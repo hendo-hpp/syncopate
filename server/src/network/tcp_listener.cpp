@@ -21,6 +21,12 @@ int tcp_listener::start() {
         return -1;
     }
 
+    // allow socket to be reused instantly
+    int opt = 1;
+    if (setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+        std::cerr << "TCP_LISTENER: failed to set socket options";
+    }
+
     // socket address description
     sockaddr_in server_addr{};
     server_addr.sin_family = AF_INET;
@@ -28,16 +34,14 @@ int tcp_listener::start() {
     server_addr.sin_addr.s_addr = INADDR_ANY;
 
     // bind the address and port to the socket
-    int bind_status = bind(m_server_fd, reinterpret_cast<struct sockaddr*>(&server_addr), sizeof(server_addr));
-    if (bind_status < 0) {
+    if (bind(m_server_fd, reinterpret_cast<struct sockaddr*>(&server_addr), sizeof(server_addr)) < 0) {
         std::cerr << "TCP_LISTENER: failed to bind address to socket.\n";
         stop();
         return -1;
     }
 
     // start listening on the socket, with a queue of length BACKLOG_COUNT
-    int listen_status = listen(m_server_fd, syncopate::config::network::BACKLOG_COUNT);
-    if (listen_status < 0) {
+    if (listen(m_server_fd, syncopate::config::network::BACKLOG_COUNT) < 0) {
         std::cerr << "TCP_LISTENER: failed to begin listening on port " << m_port << ".\n";
         stop();
         return -1;

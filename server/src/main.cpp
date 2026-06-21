@@ -1,6 +1,12 @@
-#include <iostream>
+#include "config/engine.hpp"
+#include "config/network.hpp"
+#include "engine/merger_pool.hpp"
+#include "engine/merger_queue.hpp"
+#include "network/protocol_parser.hpp"
+#include "network/tcp_listener.hpp"
+
+#include <unistd.h>
 
 int main() {
-    std::cout << "syncopate_server\n";
     return 0;
 }
